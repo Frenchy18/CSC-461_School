@@ -11285,6 +11285,7 @@ GameObject:
   - component: {fileID: 832234679}
   - component: {fileID: 832234678}
   - component: {fileID: 832234677}
+  - component: {fileID: 832234680}
   m_Layer: 0
   m_Name: ProximityTrigger
   m_TagString: Untagged
@@ -11377,6 +11378,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.8502827, y: 0.45961422, z: 3.2696366}
   m_Center: {x: -2.702282, y: -0.2701929, z: -0.3022585}
+--- !u!114 &832234680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832234675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27439e49b0df04575ba371b2ff2e85ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProximityLightToggle
+  playerRoot: {fileID: 1011142138}
+  controlledLights:
+  - {fileID: 913157112}
+  - {fileID: 863573792}
 --- !u!1 &838793774
 GameObject:
   m_ObjectHideFlags: 0
