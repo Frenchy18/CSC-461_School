@@ -31280,6 +31280,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Normal Hair Jacket Saiko
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: af362413e54e0955eb0b1f1e4f228052, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 2704021447694772235, guid: af362413e54e0955eb0b1f1e4f228052, type: 3}
