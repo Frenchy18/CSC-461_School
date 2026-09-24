@@ -13615,6 +13615,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1049947638}
   m_Mesh: {fileID: 2036413066965476130, guid: 1722577fa4572a785bdbef554fa0f498, type: 3}
+--- !u!4 &1057486553 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -1187941546366636717, guid: af362413e54e0955eb0b1f1e4f228052, type: 3}
+  m_PrefabInstance: {fileID: 1996081807}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1073043232
 GameObject:
   m_ObjectHideFlags: 0
@@ -25111,7 +25116,7 @@ MonoBehaviour:
   m_Data:
     m_Root: {fileID: 1996081812}
     m_Mid: {fileID: 1996081813}
-    m_Tip: {fileID: 1996081814}
+    m_Tip: {fileID: 1057486553}
     m_Target: {fileID: 2032392005}
     m_Hint: {fileID: 1453870854}
     m_TargetPositionWeight: 1
@@ -31421,6 +31426,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Normal Hair Jacket Saiko
       objectReference: {fileID: 0}
+    - target: {fileID: 3245475072807770317, guid: af362413e54e0955eb0b1f1e4f228052, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5a2282076dfa8183180fd5b085c876a9, type: 2}
+    - target: {fileID: 3245475072807770317, guid: af362413e54e0955eb0b1f1e4f228052, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0a5a9ea740833447c9ba45e483dbd63f, type: 2}
+    - target: {fileID: 3245475072807770317, guid: af362413e54e0955eb0b1f1e4f228052, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 52d3affa239b5341c85b434a3a15fec7, type: 2}
     - target: {fileID: 5866666021909216657, guid: af362413e54e0955eb0b1f1e4f228052, type: 3}
       propertyPath: m_Controller
       value: 
@@ -31455,7 +31472,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1996081809 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -6640598096767539147, guid: af362413e54e0955eb0b1f1e4f228052, type: 3}
+  m_CorrespondingSourceObject: {fileID: -6827649267651142313, guid: af362413e54e0955eb0b1f1e4f228052, type: 3}
   m_PrefabInstance: {fileID: 1996081807}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1996081810 stripped
