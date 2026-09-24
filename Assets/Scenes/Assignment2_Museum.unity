@@ -2658,7 +2658,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1836469536}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 40db4768e156fa89abb3568039816298, type: 3}
       propertyPath: m_LocalScale.x
@@ -2674,15 +2674,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 40db4768e156fa89abb3568039816298, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.294575
+      value: 17.570595
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 40db4768e156fa89abb3568039816298, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.652
+      value: 2.4761899
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 40db4768e156fa89abb3568039816298, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.14
+      value: -5.869
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 40db4768e156fa89abb3568039816298, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2690,15 +2690,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 40db4768e156fa89abb3568039816298, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 40db4768e156fa89abb3568039816298, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 40db4768e156fa89abb3568039816298, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 40db4768e156fa89abb3568039816298, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2726,6 +2726,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40db4768e156fa89abb3568039816298, type: 3}
+--- !u!4 &129094872 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 40db4768e156fa89abb3568039816298, type: 3}
+  m_PrefabInstance: {fileID: 129094871}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &155356419
 GameObject:
   m_ObjectHideFlags: 0
@@ -2966,6 +2971,7 @@ GameObject:
   - component: {fileID: 172266273}
   - component: {fileID: 172266272}
   - component: {fileID: 172266271}
+  - component: {fileID: 172266275}
   m_Layer: 0
   m_Name: ProximityTrigger
   m_TagString: Untagged
@@ -2995,15 +3001,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 172266269}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27439e49b0df04575ba371b2ff2e85ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProximityLightToggle
   playerRoot: {fileID: 1011142138}
-  controlledLights:
-  - {fileID: 913157112}
-  - {fileID: 863573792}
+  controlledLights: []
 --- !u!114 &172266272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3020,9 +3024,7 @@ MonoBehaviour:
   tracker: {fileID: 618468571}
   playerRoot: {fileID: 1011142138}
   uiGroups:
-  - {fileID: 1393918730}
-  - {fileID: 1686682104}
-  - {fileID: 519074605}
+  - {fileID: 1620533920}
   fadeInDuration: 0.65
   fadeOutDuration: 0.4
   stayVisibleAfterVisit: 0
@@ -3074,6 +3076,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.8502827, y: 0.45961422, z: 3.2696366}
   m_Center: {x: -2.702282, y: -0.2701929, z: -0.3022585}
+--- !u!114 &172266275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172266269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cb5aeb7102cb90b3acd7fe10e42b373, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TheaterPlaybackController
+  playerRoot: {fileID: 1011142138}
+  videoPlayer: {fileID: 2075807160}
+  restartFromBeginning: 0
+  clearScreenWhenInactive: 0
+  projectorLight: {fileID: 1349471819}
+  flickerInterval: {x: 0.06, y: 0.16}
+  intensityMultiplier: {x: 0.82, y: 1.08}
+  dropoutChance: 0.077
+  dropoutDuration: {x: 0.03, y: 0.06}
 --- !u!1 &182398611
 GameObject:
   m_ObjectHideFlags: 0
@@ -29026,8 +29049,9 @@ GameObject:
   - component: {fileID: 1620533919}
   - component: {fileID: 1620533918}
   - component: {fileID: 1620533917}
+  - component: {fileID: 1620533920}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: TheaterCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29117,6 +29141,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!225 &1620533920
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620533915}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1643522406
 GameObject:
   m_ObjectHideFlags: 0
@@ -32293,6 +32329,7 @@ Transform:
   - {fileID: 19568032}
   - {fileID: 736831552}
   - {fileID: 496785363}
+  - {fileID: 129094872}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1853322141
@@ -41103,4 +41140,3 @@ SceneRoots:
   - {fileID: 1457369824}
   - {fileID: 1757708344}
   - {fileID: 1209424948}
-  - {fileID: 129094871}
