@@ -48243,6 +48243,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -3275668972503936606, guid: d095c38e25bc21123843003df0b8ea80, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1861165455}
+    - targetCorrespondingSourceObject: {fileID: -3275668972503936606, guid: d095c38e25bc21123843003df0b8ea80, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1861165456}
   m_SourcePrefab: {fileID: 100100000, guid: d095c38e25bc21123843003df0b8ea80, type: 3}
 --- !u!4 &1861165451 stripped
 Transform:
@@ -48276,11 +48279,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 2
+  m_CollisionDetection: 1
 --- !u!114 &1861165454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48298,9 +48301,9 @@ MonoBehaviour:
   _forwardElement: {fileID: 0}
   _oneGrabTransformer: {fileID: 0}
   _twoGrabTransformer: {fileID: 0}
-  _targetTransform: {fileID: 0}
+  _targetTransform: {fileID: 1474911548}
   _maxGrabPoints: -1
-  _rigidbody: {fileID: 0}
+  _rigidbody: {fileID: 1861165453}
   _kinematicWhileSelected: 1
   _throwWhenUnselected: 1
   _forceKinematicDisabled: 0
@@ -48325,6 +48328,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0066848285, y: 0.004006982, z: 0.006353803}
   m_Center: {x: 0.03793618, y: -0.40713507, z: -0.049265254}
+--- !u!114 &1861165456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861165452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ea30be8aa7e1b560aacd8720fb17d7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CupcakePickup
+  grabbable: {fileID: 1861165454}
+  rb: {fileID: 1861165453}
 --- !u!43 &1862052813
 Mesh:
   m_ObjectHideFlags: 0
