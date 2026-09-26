@@ -22,6 +22,10 @@ public class WearableHeadphones : MonoBehaviour
 
     [SerializeField] private bool restartSongWhenWorn = true;
 
+    [Header("Visuals")]
+    [SerializeField] private Renderer[] headphoneRenderers;
+    [SerializeField] private GameObject headphoneCanvas;
+
     [Header("Debug")]
     [SerializeField] private bool debugLogging = true;
 
@@ -61,7 +65,7 @@ public class WearableHeadphones : MonoBehaviour
             wearAnchor.TransformPoint(wornLocalPosition);
 
         transform.rotation =
-            wearAnchor.rotation = wornLocalRotation;
+            wearAnchor.rotation * wornLocalRotation;
     }
 
     private void HandlePointerEvent(PointerEvent evt)
@@ -177,6 +181,7 @@ public class WearableHeadphones : MonoBehaviour
         transform.SetParent(wearAnchor, true);
 
         StartHeadphoneAudio();
+        SetHeadphoneVisuals(false);
 
         if (debugLogging)
         {
@@ -191,6 +196,9 @@ public class WearableHeadphones : MonoBehaviour
     {
         IsWorn = false;
 
+        // Make them visible immediately as the player grabs them.
+        SetHeadphoneVisuals(true);
+
         // Preserve world position when grabbing them off the head.
         transform.SetParent(null, true);
 
@@ -203,6 +211,8 @@ public class WearableHeadphones : MonoBehaviour
     private void MakePhysical()
     {
         IsWorn = false;
+
+        SetHeadphoneVisuals(true);
 
         transform.SetParent(null, true);
 
@@ -251,5 +261,20 @@ public class WearableHeadphones : MonoBehaviour
 
         if (playerAmbientAudio != null)
             playerAmbientAudio.mute = ambientWasMuted;
+    }
+
+    private void SetHeadphoneVisuals(bool visible)
+    {
+        if (headphoneRenderers != null)
+        {
+            foreach (Renderer renderer in headphoneRenderers)
+            {
+                if (renderer != null)
+                    renderer.enabled = visible;
+            }
+        }
+
+        if (headphoneCanvas != null)
+            headphoneCanvas.SetActive(visible);
     }
 }

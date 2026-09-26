@@ -162,9 +162,13 @@ public class FinalRevealController : MonoBehaviour
             }
         }
 
+        Debug.log($"REVEAL ROTATION START | Pivot before = {revealPivot.eulerAngles}",this);
+        
         // Rotate the complete Chica/light/cupcake rig
         // toward the player's current position while everything is dark.
         FaceRevealTowardPlayer();
+
+        Debug.log($"REVEAL ROTATION END | Pivot after = {revealPivot.eulerAngles}",this);
 
         // Now place Chica into the scene.
         if (chicaRoot != null)
@@ -195,34 +199,69 @@ public class FinalRevealController : MonoBehaviour
 
     private void FaceRevealTowardPlayer()
     {
-        if (revealPivot == null || playerHead == null)
+        if (revealPivot == null || playerHead == null || chicaRoot == null)
+        {
+            Debug.LogWarning(
+                "Cannot rotate Chica: missing revealPivot, playerHead, or chicaRoot.",
+                this
+            );
             return;
+        }
 
+        // Direction from Chica herself toward the player.
         Vector3 toPlayer =
-            playerHead.position - revealPivot.position;
+            playerHead.position - chicaRoot.transform.position;
 
-        // Only rotate horizontally.
         toPlayer.y = 0f;
 
         if (toPlayer.sqrMagnitude < 0.001f)
             return;
 
-        // ChicaPivot faces the player.
-        revealPivot.rotation =
-            Quaternion.LookRotation(
-                toPlayer.normalized,
+        toPlayer.Normalize();
+
+        // Use Chica's actual transform orientation instead of assuming
+        // that ChicaPivot's +Z axis is her visual forward direction.
+        Vector3 chicaForward =
+            Vector3.ProjectOnPlane(
+                chicaRoot.transform.forward,
                 Vector3.up
             );
 
-        // Separate correction for the imported model's forward axis.
-        if (facingOffset != null)
+        if (chicaForward.sqrMagnitude < 0.001f)
+            return;
+
+        chicaForward.Normalize();
+
+        // Determine how far Chica must rotate from where she currently
+        // faces to point toward the player.
+        Quaternion rotationDifference =
+            Quaternion.FromToRotation(
+                chicaForward,
+                toPlayer
+            );
+
+        // Rotate the entire reveal rig by that amount.
+        revealPivot.rotation =
+            rotationDifference * revealPivot.rotation;
+
+        // Optional final visual correction.
+        if (Mathf.Abs(chicaYawOffset) > 0.01f)
         {
-            facingOffset.localRotation =
-                Quaternion.Euler(
-                    0f,
-                    chicaYawOffset,
-                    0f
-                );
+            revealPivot.Rotate(
+                0f,
+                chicaYawOffset,
+                0f,
+                Space.World
+            );
         }
+
+        Debug.Log(
+            $"CHICA ROTATED | " +
+            $"Player: {playerHead.position} | " +
+            $"Chica: {chicaRoot.transform.position} | " +
+            $"Target Direction: {toPlayer} | " +
+            $"Pivot Y: {revealPivot.eulerAngles.y:F1}",
+            this
+        );
     }
 }
