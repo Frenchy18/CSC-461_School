@@ -35,6 +35,12 @@ public class FinalRevealController : MonoBehaviour
     [Header("Optional Audio")]
     [SerializeField] private AudioSource revealSting;
 
+    [Header("Reveal Orientation")]
+    [SerializeField] private Transform revealPivot;
+
+    [Tooltip("Use this if Chica's imported forward direction is not Unity +Z.")]
+    [SerializeField] private float chicaYawOffset = 0f;
+
     private bool museumCompleted;
     private bool revealArmed;
     private bool revealTriggered;
@@ -144,10 +150,7 @@ public class FinalRevealController : MonoBehaviour
 
     private IEnumerator RevealSequence()
     {
-        // GLOBAL BLACKOUT.
-        //
-        // Disable the Light GameObjects themselves so that
-        // exhibit scripts cannot simply re-enable their Light components.
+        // Black out the museum.
         if (lightsToTurnOff != null)
         {
             foreach (Light light in lightsToTurnOff)
@@ -157,14 +160,18 @@ public class FinalRevealController : MonoBehaviour
             }
         }
 
-        // Put Chica into position while the room is dark.
+        // Rotate the complete Chica/light/cupcake rig
+        // toward the player's current position while everything is dark.
+        FaceRevealTowardPlayer();
+
+        // Now place Chica into the scene.
         if (chicaRoot != null)
             chicaRoot.SetActive(true);
 
         if (blackoutDuration > 0f)
             yield return new WaitForSeconds(blackoutDuration);
 
-        // Reveal Chica.
+        // Turn on the three reveal spotlights.
         if (revealSpotlights != null)
         {
             foreach (Light light in revealSpotlights)
@@ -182,5 +189,30 @@ public class FinalRevealController : MonoBehaviour
             revealSting.enabled = true;
             revealSting.Play();
         }
+    }
+
+    private void FaceRevealTowardPlayer()
+    {
+        if (revealPivot == null || playerHead == null)
+            return;
+
+        Vector3 toPlayer =
+            playerHead.position - revealPivot.position;
+
+        // Ignore height. Chica should only spin around Y.
+        toPlayer.y = 0f;
+
+        if (toPlayer.sqrMagnitude < 0.001f)
+            return;
+
+        Quaternion facePlayer =
+            Quaternion.LookRotation(
+                toPlayer.normalized,
+                Vector3.up
+            );
+
+        revealPivot.rotation =
+            facePlayer *
+            Quaternion.Euler(0f, chicaYawOffset, 0f);
     }
 }

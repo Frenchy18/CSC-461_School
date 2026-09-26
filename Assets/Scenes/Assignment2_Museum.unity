@@ -8625,7 +8625,7 @@ Transform:
   m_GameObject: {fileID: 308733573}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.448, z: 0}
+  m_LocalPosition: {x: 2.637, y: 0.448, z: -1.418}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12205,6 +12205,41 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!1 &471712666
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 471712667}
+  m_Layer: 0
+  m_Name: ChicaPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &471712667
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471712666}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.08310608, z: -0, w: 0.9965407}
+  m_LocalPosition: {x: -0.02559781, y: 0, z: -0.028596401}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1861165451}
+  - {fileID: 998998735}
+  - {fileID: 904358043}
+  - {fileID: 2117186883}
+  m_Father: {fileID: 847147929}
+  m_LocalEulerAnglesHint: {x: 0, y: -9.534, z: 0}
 --- !u!1001 &481255905
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24437,10 +24472,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1861165451}
-  - {fileID: 998998735}
-  - {fileID: 904358043}
-  - {fileID: 2117186883}
+  - {fileID: 471712667}
   m_Father: {fileID: 308733574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &863573789
@@ -24900,11 +24932,11 @@ Transform:
   m_GameObject: {fileID: 904358042}
   serializedVersion: 2
   m_LocalRotation: {x: 0.48437536, y: -0.3291662, z: 0.55837595, w: 0.5875768}
-  m_LocalPosition: {x: -0.43800002, y: 3.061, z: -1.301}
+  m_LocalPosition: {x: -0.43799996, y: 3.061, z: -1.3009999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 847147929}
+  m_Father: {fileID: 471712667}
   m_LocalEulerAnglesHint: {x: 110.47699, y: -153.863, z: -74.616}
 --- !u!114 &904358044
 MonoBehaviour:
@@ -26623,11 +26655,11 @@ Transform:
   m_GameObject: {fileID: 998998734}
   serializedVersion: 2
   m_LocalRotation: {x: 0.76441085, y: 0.059385978, z: 0.07138513, w: 0.6380076}
-  m_LocalPosition: {x: -0.482, y: 3.016, z: 0.267}
+  m_LocalPosition: {x: -0.48199987, y: 3.016, z: 0.26699996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 847147929}
+  m_Father: {fileID: 471712667}
   m_LocalEulerAnglesHint: {x: 104.778, y: -46.463013, z: -45.483}
 --- !u!114 &998998736
 MonoBehaviour:
@@ -28730,6 +28762,8 @@ MonoBehaviour:
   - {fileID: 737258148}
   blackoutDuration: 0.35
   revealSting: {fileID: 342725307}
+  revealPivot: {fileID: 471712667}
+  chicaYawOffset: 0
 --- !u!1 &1142426295
 GameObject:
   m_ObjectHideFlags: 0
@@ -47255,7 +47289,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 847147929}
+    m_TransformParent: {fileID: 471712667}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: d095c38e25bc21123843003df0b8ea80, type: 3}
       propertyPath: m_LocalPosition.x
@@ -58346,11 +58380,11 @@ Transform:
   m_GameObject: {fileID: 2117186882}
   serializedVersion: 2
   m_LocalRotation: {x: 0.6926909, y: -0.27648088, z: -0.33105752, w: 0.5780473}
-  m_LocalPosition: {x: 2.707, y: 2.487, z: 0.172}
+  m_LocalPosition: {x: 2.7069998, y: 2.487, z: 0.17200005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 847147929}
+  m_Father: {fileID: 471712667}
   m_LocalEulerAnglesHint: {x: 141.84799, y: 81.773, z: 76.855}
 --- !u!114 &2117186884
 MonoBehaviour:
