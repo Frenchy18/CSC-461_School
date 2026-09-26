@@ -33,6 +33,7 @@ Shader "Museum/HorrorVideoGrade"
 
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile_instancing
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
@@ -41,6 +42,8 @@ Shader "Museum/HorrorVideoGrade"
                 float4 positionOS : POSITION;
                 float2 uv : TEXCOORD0;
                 float4 color : COLOR;
+
+                UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
             struct Varyings
@@ -48,6 +51,8 @@ Shader "Museum/HorrorVideoGrade"
                 float4 positionHCS : SV_POSITION;
                 float2 uv : TEXCOORD0;
                 float4 color : COLOR;
+
+                UNITY_VERTEX_OUTPUT_STEREO
             };
 
             TEXTURE2D(_MainTex);
@@ -64,7 +69,13 @@ Shader "Museum/HorrorVideoGrade"
 
             Varyings vert(Attributes input)
             {
-                Varyings output;
+                UNITY_SETUP_INSTANCE_ID(input);
+
+                // Unity 6 URP-safe initialization.
+                Varyings output = (Varyings)0;
+
+                // Pass the correct eye index through the vertex shader.
+                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(output);
 
                 output.positionHCS =
                     TransformObjectToHClip(input.positionOS.xyz);
@@ -77,6 +88,9 @@ Shader "Museum/HorrorVideoGrade"
 
             half4 frag(Varyings input) : SV_Target
             {
+                // Restore the correct stereo eye index.
+                UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
+
                 half4 col =
                     SAMPLE_TEXTURE2D(
                         _MainTex,
@@ -84,24 +98,38 @@ Shader "Museum/HorrorVideoGrade"
                         input.uv
                     );
 
-                // Desaturate
+                // Desaturation
                 half luminance =
-                    dot(col.rgb, half3(0.2126, 0.7152, 0.0722));
+                    dot(
+                        col.rgb,
+                        half3(0.2126, 0.7152, 0.0722)
+                    );
 
                 col.rgb =
-                    lerp(luminance.xxx, col.rgb, _Saturation);
+                    lerp(
+                        luminance.xxx,
+                        col.rgb,
+                        _Saturation
+                    );
 
                 // Contrast
                 col.rgb =
-                    (col.rgb - 0.5) * _Contrast + 0.5;
+                    (col.rgb - 0.5) *
+                    _Contrast +
+                    0.5;
 
-                // Darken and tint
+                // Brightness / darkness
                 col.rgb *= _Brightness;
+
+                // Horror tint
                 col.rgb *= _Tint.rgb;
 
                 // Vignette
-                float2 centeredUV = input.uv - 0.5;
-                float distanceFromCenter = length(centeredUV);
+                float2 centeredUV =
+                    input.uv - 0.5;
+
+                float distanceFromCenter =
+                    length(centeredUV);
 
                 float vignette =
                     smoothstep(
@@ -110,11 +138,12 @@ Shader "Museum/HorrorVideoGrade"
                         distanceFromCenter
                     );
 
-                col.rgb *= lerp(
-                    1.0,
-                    vignette,
-                    _VignetteStrength
-                );
+                col.rgb *=
+                    lerp(
+                        1.0,
+                        vignette,
+                        _VignetteStrength
+                    );
 
                 col.a *= input.color.a;
 
