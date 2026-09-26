@@ -2378,7 +2378,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 21.13802, y: 0.118190005, z: -8.671}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0304, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1836469536}
@@ -3548,8 +3548,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 18.384844, y: 0.88004446, z: 12.649115}
-  m_Center: {x: 5.565011, y: -0.480408, z: 0.26688406}
+  m_Size: {x: 20.286833, y: 0.48647302, z: 12.649115}
+  m_Center: {x: 4.6139965, y: -0.6771854, z: 0.26688406}
 --- !u!114 &172266275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5101,9 +5101,8 @@ MonoBehaviour:
   playerAmbientAudio: {fileID: 838793776}
   headphoneAudio: {fileID: 1777914280}
   restartSongWhenWorn: 0
-  headphoneRenderers:
-  - {fileID: 1231395637}
-  headphoneCanvas: {fileID: 639400299}
+  headphoneRenderers: []
+  headphoneCanvas: {fileID: 0}
   debugLogging: 1
 --- !u!114 &227692652
 MonoBehaviour:
@@ -28521,7 +28520,7 @@ MonoBehaviour:
   revealSting: {fileID: 342725307}
   revealPivot: {fileID: 471712667}
   facingOffset: {fileID: 636397611}
-  chicaYawOffset: 0
+  chicaYawOffset: -5
 --- !u!1 &1142426295
 GameObject:
   m_ObjectHideFlags: 0
@@ -31094,7 +31093,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1274253501}
+  m_Mesh: {fileID: 1047131204}
 --- !u!33 &1216508699
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -31393,11 +31392,6 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!23 &1231395637 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7918335002988649766, guid: 085f1157bd93d19a1a453c387b044e5b, type: 3}
-  m_PrefabInstance: {fileID: 227692645}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1237962703
 GameObject:
   m_ObjectHideFlags: 0
@@ -35384,8 +35378,8 @@ Transform:
   m_GameObject: {fileID: 1386166109}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 21.13802, y: 0.118190005, z: -1.8889999}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 21.094, y: 0.118190005, z: -1.8889999}
+  m_LocalScale: {x: 1.0161, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1836469536}
@@ -43586,8 +43580,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 3, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.5788687, y: 0.11971903, z: 1}
+  m_Center: {x: -0.052770674, y: -1.4401405, z: 0}
 --- !u!4 &1735927796
 Transform:
   m_ObjectHideFlags: 0

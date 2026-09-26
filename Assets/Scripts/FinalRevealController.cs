@@ -161,14 +161,10 @@ public class FinalRevealController : MonoBehaviour
                     light.gameObject.SetActive(false);
             }
         }
-
-        Debug.log($"REVEAL ROTATION START | Pivot before = {revealPivot.eulerAngles}",this);
         
         // Rotate the complete Chica/light/cupcake rig
         // toward the player's current position while everything is dark.
         FaceRevealTowardPlayer();
-
-        Debug.log($"REVEAL ROTATION END | Pivot after = {revealPivot.eulerAngles}",this);
 
         // Now place Chica into the scene.
         if (chicaRoot != null)
