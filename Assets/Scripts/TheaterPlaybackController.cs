@@ -13,12 +13,13 @@ public class TheaterPlaybackController : MonoBehaviour
     [SerializeField] private bool restartFromBeginning = true;
     [SerializeField] private bool clearScreenWhenInactive = true;
 
-    [Header("Projector")]
-    [SerializeField] private Light projectorLight;
-
     [Header("Projector Flicker")]
     [SerializeField] private Vector2 flickerInterval = new Vector2(0.06f, 0.16f);
     [SerializeField] private Vector2 intensityMultiplier = new Vector2(0.82f, 1.08f);
+
+    [Header("Projector")]
+    [SerializeField] private Light projectorLight;
+    [SerializeField] private AudioSource projectorAudio;
 
     [Range(0f, 1f)]
     [SerializeField] private float dropoutChance = 0.04f;
@@ -124,6 +125,9 @@ public class TheaterPlaybackController : MonoBehaviour
             videoPlayer.Pause();
         }
 
+        if (projectorAudio != null)
+            projectorAudio.Stop();
+
         StopProjector();
 
         if (clearScreenWhenInactive)
@@ -153,6 +157,12 @@ public class TheaterPlaybackController : MonoBehaviour
             videoPlayer.time = 0.0;
 
         videoPlayer.Play();
+
+        if (projectorAudio != null &&
+            !projectorAudio.isPlaying)
+        {
+            projectorAudio.Play();
+        }
     }
 
     private void StartProjector()
@@ -247,6 +257,9 @@ public class TheaterPlaybackController : MonoBehaviour
             videoPlayer.Pause();
 
         StopProjector();
+
+        if (projectorAudio != null)
+            projectorAudio.Stop();
     }
 
     private void OnDestroy()
