@@ -19,7 +19,8 @@ public class TheaterPlaybackController : MonoBehaviour
 
     [Header("Projector")]
     [SerializeField] private Light projectorLight;
-    [SerializeField] private AudioSource projectorAudio;
+    [SerializeField] private AudioSource projectorStartupAudio;
+    [SerializeField] private AudioSource projectorRunningAudio;
 
     [Range(0f, 1f)]
     [SerializeField] private float dropoutChance = 0.04f;
@@ -32,6 +33,7 @@ public class TheaterPlaybackController : MonoBehaviour
     private float baseProjectorIntensity;
     private bool playerInside;
     private bool preparationRequested;
+    private Coroutine projectorAudioCoroutine;
 
     private void Awake()
     {
@@ -119,14 +121,9 @@ public class TheaterPlaybackController : MonoBehaviour
         playerInside = false;
 
         if (videoPlayer != null && videoPlayer.isPlaying)
-        {
-            // Pause instead of Stop so Unity keeps the video prepared.
-            // This makes the next entrance start much faster.
             videoPlayer.Pause();
-        }
 
-        if (projectorAudio != null)
-            projectorAudio.Stop();
+        StopProjectorAudio();
 
         StopProjector();
 
@@ -158,11 +155,7 @@ public class TheaterPlaybackController : MonoBehaviour
 
         videoPlayer.Play();
 
-        if (projectorAudio != null &&
-            !projectorAudio.isPlaying)
-        {
-            projectorAudio.Play();
-        }
+        StartProjectorAudio();
     }
 
     private void StartProjector()
@@ -258,8 +251,7 @@ public class TheaterPlaybackController : MonoBehaviour
 
         StopProjector();
 
-        if (projectorAudio != null)
-            projectorAudio.Stop();
+        StopProjectorAudio();
     }
 
     private void OnDestroy()
@@ -269,5 +261,67 @@ public class TheaterPlaybackController : MonoBehaviour
             videoPlayer.prepareCompleted -= OnVideoPrepared;
             videoPlayer.errorReceived -= OnVideoError;
         }
+    }
+
+    private void StartProjectorAudio()
+    {
+        StopProjectorAudio();
+
+        projectorAudioCoroutine =
+            StartCoroutine(ProjectorAudioSequence());
+    }
+
+    private IEnumerator ProjectorAudioSequence()
+    {
+        // Startup / spin-up sound.
+        if (projectorStartupAudio != null)
+        {
+            projectorStartupAudio.loop = false;
+            projectorStartupAudio.Play();
+
+            while (projectorStartupAudio.isPlaying)
+            {
+                if (!playerInside)
+                {
+                    projectorAudioCoroutine = null;
+                    yield break;
+                }
+
+                yield return null;
+            }
+        }
+
+        // Only begin the mechanical loop if the player
+        // is still in the theater and the movie is playing.
+        if (!playerInside ||
+            videoPlayer == null ||
+            !videoPlayer.isPlaying)
+        {
+            projectorAudioCoroutine = null;
+            yield break;
+        }
+
+        if (projectorRunningAudio != null)
+        {
+            projectorRunningAudio.loop = true;
+            projectorRunningAudio.Play();
+        }
+
+        projectorAudioCoroutine = null;
+    }
+
+    private void StopProjectorAudio()
+    {
+        if (projectorAudioCoroutine != null)
+        {
+            StopCoroutine(projectorAudioCoroutine);
+            projectorAudioCoroutine = null;
+        }
+
+        if (projectorStartupAudio != null)
+            projectorStartupAudio.Stop();
+
+        if (projectorRunningAudio != null)
+            projectorRunningAudio.Stop();
     }
 }

@@ -38,7 +38,9 @@ public class FinalRevealController : MonoBehaviour
     [Header("Reveal Orientation")]
     [SerializeField] private Transform revealPivot;
 
-    [Tooltip("Use this if Chica's imported forward direction is not Unity +Z.")]
+    [SerializeField] private Transform facingOffset;
+
+    [Tooltip("Corrects Chica's imported forward direction.")]
     [SerializeField] private float chicaYawOffset = 0f;
 
     private bool museumCompleted;
@@ -199,20 +201,28 @@ public class FinalRevealController : MonoBehaviour
         Vector3 toPlayer =
             playerHead.position - revealPivot.position;
 
-        // Ignore height. Chica should only spin around Y.
+        // Only rotate horizontally.
         toPlayer.y = 0f;
 
         if (toPlayer.sqrMagnitude < 0.001f)
             return;
 
-        Quaternion facePlayer =
+        // ChicaPivot faces the player.
+        revealPivot.rotation =
             Quaternion.LookRotation(
                 toPlayer.normalized,
                 Vector3.up
             );
 
-        revealPivot.rotation =
-            facePlayer *
-            Quaternion.Euler(0f, chicaYawOffset, 0f);
+        // Separate correction for the imported model's forward axis.
+        if (facingOffset != null)
+        {
+            facingOffset.localRotation =
+                Quaternion.Euler(
+                    0f,
+                    chicaYawOffset,
+                    0f
+                );
+        }
     }
 }

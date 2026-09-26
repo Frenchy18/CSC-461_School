@@ -8,9 +8,13 @@ public class WearableHeadphones : MonoBehaviour
     [SerializeField] private Grabbable grabbable;
     [SerializeField] private Rigidbody headphoneRigidbody;
 
-    [Header("Wear")]
+    [Header("Wear Detection")]
     [SerializeField] private Transform wearAnchor;
-    [SerializeField] private float snapDistance = 0.25f;
+
+    [Tooltip("Point inside the headphones where the player's head should be.")]
+    [SerializeField] private Transform wearCheckPoint;
+
+    [SerializeField] private float snapDistance = 0.40f;
 
     [Header("Audio")]
     [SerializeField] private AudioSource playerAmbientAudio;
@@ -18,27 +22,24 @@ public class WearableHeadphones : MonoBehaviour
 
     [SerializeField] private bool restartSongWhenWorn = true;
 
+    [Header("Debug")]
+    [SerializeField] private bool debugLogging = true;
+
     public bool IsWorn { get; private set; }
 
-    private bool isGrabbed;
     private bool ambientWasMuted;
-
     private Coroutine releaseRoutine;
 
     private void OnEnable()
     {
         if (grabbable != null)
-        {
             grabbable.WhenPointerEventRaised += HandlePointerEvent;
-        }
     }
 
     private void OnDisable()
     {
         if (grabbable != null)
-        {
             grabbable.WhenPointerEventRaised -= HandlePointerEvent;
-        }
 
         RestoreNormalAudio();
     }
@@ -49,110 +50,119 @@ public class WearableHeadphones : MonoBehaviour
         {
             case PointerEventType.Select:
 
-                isGrabbed = true;
-
-                // Player grabbed the headphones while they were being worn.
+                // Grabbing them while worn means the player
+                // is taking them back off.
                 if (IsWorn)
-                {
                     BeginTakeOff();
-                }
 
                 break;
 
-
             case PointerEventType.Unselect:
-
-                isGrabbed = false;
 
                 if (releaseRoutine != null)
                     StopCoroutine(releaseRoutine);
 
-                releaseRoutine = StartCoroutine(FinishRelease());
+                // IMPORTANT:
+                // Test the distance NOW, before physics throws/moves
+                // the headphones on the next frame.
+                float distance = GetWearDistance();
+                bool shouldWear = distance <= snapDistance;
 
-                break;
+                if (debugLogging)
+                {
+                    Debug.Log(
+                        $"Headphones released {distance:F3}m from head. " +
+                        $"Snap distance = {snapDistance:F3}m. " +
+                        $"Will wear = {shouldWear}",
+                        this
+                    );
+                }
 
-
-            case PointerEventType.Cancel:
-
-                isGrabbed = false;
+                releaseRoutine =
+                    StartCoroutine(FinishRelease(shouldWear));
 
                 break;
         }
     }
 
-    private IEnumerator FinishRelease()
+    private IEnumerator FinishRelease(bool shouldWear)
     {
-        // Let Interaction SDK completely finish its release first.
+        // Allow Interaction SDK to finish releasing ownership.
         yield return null;
 
         releaseRoutine = null;
 
-        if (wearAnchor == null)
-            yield break;
-
-        float distance = Vector3.Distance(
-            GetHeadphonePosition(),
-            wearAnchor.position
-        );
-
-        if (distance <= snapDistance)
-        {
+        if (shouldWear)
             PutOn();
-        }
         else
-        {
             MakePhysical();
-        }
     }
 
-    private Vector3 GetHeadphonePosition()
+    private float GetWearDistance()
     {
-        if (headphoneRigidbody != null)
-            return headphoneRigidbody.worldCenterOfMass;
+        if (wearAnchor == null)
+            return float.MaxValue;
 
-        return transform.position;
+        Transform checkPoint =
+            wearCheckPoint != null
+                ? wearCheckPoint
+                : transform;
+
+        return Vector3.Distance(
+            checkPoint.position,
+            wearAnchor.position
+        );
     }
 
     private void PutOn()
     {
-        if (IsWorn)
+        if (IsWorn || wearAnchor == null)
             return;
 
         IsWorn = true;
 
         if (headphoneRigidbody != null)
         {
-            headphoneRigidbody.linearVelocity = Vector3.zero;
-            headphoneRigidbody.angularVelocity = Vector3.zero;
+            headphoneRigidbody.linearVelocity =
+                Vector3.zero;
+
+            headphoneRigidbody.angularVelocity =
+                Vector3.zero;
 
             headphoneRigidbody.useGravity = false;
             headphoneRigidbody.isKinematic = true;
         }
 
+        // Parent the complete headphone object to the head anchor.
         transform.SetParent(wearAnchor, false);
 
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
 
         StartHeadphoneAudio();
+
+        if (debugLogging)
+            Debug.Log("Headphones equipped.", this);
     }
 
     private void BeginTakeOff()
     {
         IsWorn = false;
 
-        // Preserve world position when removing them from the head.
+        // Preserve world position when grabbing them off the head.
         transform.SetParent(null, true);
 
         StopHeadphoneAudio();
 
-        // Don't change Rigidbody state here.
-        // Interaction SDK currently owns it while grabbed.
+        if (debugLogging)
+            Debug.Log("Headphones removed.", this);
     }
 
     private void MakePhysical()
     {
         IsWorn = false;
+
+        transform.SetParent(null, true);
 
         if (headphoneRigidbody != null)
         {
@@ -180,35 +190,24 @@ public class WearableHeadphones : MonoBehaviour
             headphoneAudio.time = 0f;
         }
 
-        if (!headphoneAudio.isPlaying)
-        {
-            headphoneAudio.Play();
-        }
+        headphoneAudio.Play();
     }
 
     private void StopHeadphoneAudio()
     {
         if (headphoneAudio != null)
-        {
             headphoneAudio.Stop();
-        }
 
         if (playerAmbientAudio != null)
-        {
             playerAmbientAudio.mute = ambientWasMuted;
-        }
     }
 
     private void RestoreNormalAudio()
     {
         if (headphoneAudio != null)
-        {
             headphoneAudio.Stop();
-        }
 
         if (playerAmbientAudio != null)
-        {
             playerAmbientAudio.mute = ambientWasMuted;
-        }
     }
 }

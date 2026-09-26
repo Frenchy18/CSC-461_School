@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
@@ -11,10 +10,7 @@ public class ProximityAudioTrigger : MonoBehaviour
     [Header("Audio")]
     [SerializeField] private AudioSource audioSource;
 
-    [Tooltip("If enabled, the sound stops when the player leaves the area.")]
-    [SerializeField] private bool stopOnExit = true;
-
-    private readonly HashSet<Collider> playerColliders = new();
+    private bool hasPlayed;
 
     private void Awake()
     {
@@ -26,38 +22,26 @@ public class ProximityAudioTrigger : MonoBehaviour
         rb.useGravity = false;
 
         if (audioSource != null)
+        {
             audioSource.playOnAwake = false;
+            audioSource.loop = false;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (hasPlayed)
+            return;
+
         if (!IsPlayer(other))
             return;
 
-        playerColliders.Add(other);
+        // Set this BEFORE Play() so another player collider
+        // entering on the same frame cannot trigger it again.
+        hasPlayed = true;
 
-        // Only trigger once when the first part of the player enters.
-        if (playerColliders.Count == 1 &&
-            audioSource != null &&
-            !audioSource.isPlaying)
-        {
+        if (audioSource != null)
             audioSource.Play();
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (!IsPlayer(other))
-            return;
-
-        playerColliders.Remove(other);
-
-        if (playerColliders.Count == 0 &&
-            stopOnExit &&
-            audioSource != null)
-        {
-            audioSource.Stop();
-        }
     }
 
     private bool IsPlayer(Collider other)
