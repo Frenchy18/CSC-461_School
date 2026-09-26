@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -18,8 +19,14 @@ public class ExhibitVisitTracker : MonoBehaviour
 
     private readonly HashSet<string> _visitedExhibits = new HashSet<string>();
 
+    private bool _completionRaised;
+
     public int VisitedCount => _visitedExhibits.Count;
     public int TotalExhibits => totalExhibits;
+
+    public bool IsComplete => VisitedCount >= totalExhibits;
+
+    public event Action OnMuseumCompleted;
 
     private void Awake()
     {
@@ -29,6 +36,7 @@ public class ExhibitVisitTracker : MonoBehaviour
                 "More than one ExhibitVisitTracker exists in the scene. " +
                 "Only one tracker should be active.",
                 this);
+
             return;
         }
 
@@ -49,10 +57,10 @@ public class ExhibitVisitTracker : MonoBehaviour
             Debug.LogWarning(
                 "An ExhibitTrigger tried to register a visit without an Exhibit ID.",
                 this);
+
             return false;
         }
 
-        // HashSet.Add returns false when this exhibit was already visited.
         if (!_visitedExhibits.Add(exhibitId))
             return false;
 
@@ -61,6 +69,15 @@ public class ExhibitVisitTracker : MonoBehaviour
         Debug.Log(
             $"Visited exhibit '{exhibitId}'. Progress: {VisitedCount}/{totalExhibits}",
             this);
+
+        if (!_completionRaised && IsComplete)
+        {
+            _completionRaised = true;
+
+            Debug.Log("Museum completed!", this);
+
+            OnMuseumCompleted?.Invoke();
+        }
 
         return true;
     }
@@ -74,6 +91,8 @@ public class ExhibitVisitTracker : MonoBehaviour
     public void ResetVisits()
     {
         _visitedExhibits.Clear();
+        _completionRaised = false;
+
         RefreshProgressUI();
     }
 
