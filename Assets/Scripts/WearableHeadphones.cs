@@ -29,6 +29,8 @@ public class WearableHeadphones : MonoBehaviour
 
     private bool ambientWasMuted;
     private Coroutine releaseRoutine;
+    private Vector3 wornLocalPosition;
+    private Quaternion wornLocalRotation;
 
     private void OnEnable()
     {
@@ -42,6 +44,24 @@ public class WearableHeadphones : MonoBehaviour
             grabbable.WhenPointerEventRaised -= HandlePointerEvent;
 
         RestoreNormalAudio();
+    }
+
+    private void LateUpdate()
+    {
+        if (!IsWorn || wearAnchor == null)
+            return;
+
+        // If Interaction SDK has changed the parent for any reason,
+        // put the headphones back under the head anchor.
+        if (transform.parent != wearAnchor)
+            transform.SetParent(wearAnchor, true);
+
+        // Explicitly follow the tracked HMD pose.
+        transform.position =
+            wearAnchor.TransformPoint(wornLocalPosition);
+
+        transform.rotation =
+            wearAnchor.rotation = wornLocalRotation;
     }
 
     private void HandlePointerEvent(PointerEvent evt)
@@ -133,16 +153,38 @@ public class WearableHeadphones : MonoBehaviour
             headphoneRigidbody.isKinematic = true;
         }
 
-        // Parent the complete headphone object to the head anchor.
-        transform.SetParent(wearAnchor, false);
+        // Keep the current headphone rotation.
+        // Only move them enough for the checkpoint to meet the head anchor.
+        Transform checkPoint =
+            wearCheckPoint != null
+                ? wearCheckPoint
+                : transform;
 
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
+        Vector3 positionDifference =
+            wearAnchor.position - checkPoint.position;
+
+        transform.position += positionDifference;
+
+        // Preserve the exact position/rotation relative to the player's head.
+        wornLocalPosition =
+            wearAnchor.InverseTransformPoint(transform.position);
+
+        wornLocalRotation =
+            Quaternion.Inverse(wearAnchor.rotation)
+            * transform.rotation;
+
+        // Parent them to the head as well.
+        transform.SetParent(wearAnchor, true);
 
         StartHeadphoneAudio();
 
         if (debugLogging)
-            Debug.Log("Headphones equipped.", this);
+        {
+            Debug.Log(
+                $"Headphones equipped. Parent = {transform.parent.name}",
+                this
+            );
+        }
     }
 
     private void BeginTakeOff()
