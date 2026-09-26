@@ -54185,6 +54185,7 @@ GameObject:
   - component: {fileID: 1940678398}
   - component: {fileID: 1940678397}
   - component: {fileID: 1940678400}
+  - component: {fileID: 1940678401}
   m_Layer: 0
   m_Name: ProximityTrigger
   m_TagString: Untagged
@@ -54290,6 +54291,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ProximityLightToggle
   playerRoot: {fileID: 1011142138}
   controlledLights: []
+--- !u!114 &1940678401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940678395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6502c939609c8ce88b5a883daa72744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PostProductionExhibitController
+  playerRoot: {fileID: 1011142138}
+  hallwayVideo: {fileID: 1835982190}
+  restartOnEnter: 1
+  pauseOnExit: 1
+  debugLogging: 1
 --- !u!1001 &1944080331
 PrefabInstance:
   m_ObjectHideFlags: 0
