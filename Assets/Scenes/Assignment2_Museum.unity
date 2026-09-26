@@ -3446,7 +3446,7 @@ GameObject:
   - component: {fileID: 172266272}
   - component: {fileID: 172266271}
   - component: {fileID: 172266275}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ProximityTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5101,8 +5101,9 @@ MonoBehaviour:
   playerAmbientAudio: {fileID: 838793776}
   headphoneAudio: {fileID: 1777914280}
   restartSongWhenWorn: 0
-  headphoneRenderers: []
-  headphoneCanvas: {fileID: 0}
+  headphoneRenderers:
+  - {fileID: 499225991}
+  headphoneCanvas: {fileID: 639400299}
   debugLogging: 1
 --- !u!114 &227692652
 MonoBehaviour:
@@ -16641,6 +16642,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1836469536}
   m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
+--- !u!23 &499225991 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7918335002988649766, guid: 085f1157bd93d19a1a453c387b044e5b, type: 3}
+  m_PrefabInstance: {fileID: 227692645}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519020308
 GameObject:
   m_ObjectHideFlags: 0
@@ -21826,7 +21832,7 @@ GameObject:
   - component: {fileID: 720033675}
   - component: {fileID: 720033674}
   - component: {fileID: 720033677}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: ProximityTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23462,7 +23468,7 @@ GameObject:
   - component: {fileID: 832234678}
   - component: {fileID: 832234677}
   - component: {fileID: 832234680}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ProximityTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24180,6 +24186,59 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!1 &865966542
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 865966543}
+  - component: {fileID: 865966544}
+  m_Layer: 8
+  m_Name: ProximityTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &865966543
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865966542}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.086, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1735927796}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &865966544
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865966542}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.5788687, y: 0.11971903, z: 1}
+  m_Center: {x: -0.052770674, y: -1.4401405, z: 0}
 --- !u!1001 &869493191
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28520,7 +28579,7 @@ MonoBehaviour:
   revealSting: {fileID: 342725307}
   revealPivot: {fileID: 471712667}
   facingOffset: {fileID: 636397611}
-  chicaYawOffset: -5
+  chicaYawOffset: 0
 --- !u!1 &1142426295
 GameObject:
   m_ObjectHideFlags: 0
@@ -33099,35 +33158,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a5f52995be93776c9a57c6d531ff1d3a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.007361087
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a5f52995be93776c9a57c6d531ff1d3a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.00000068175683
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a5f52995be93776c9a57c6d531ff1d3a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.006878343
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a5f52995be93776c9a57c6d531ff1d3a, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071067
+      value: 0.51762265
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a5f52995be93776c9a57c6d531ff1d3a, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: -0.5176228
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a5f52995be93776c9a57c6d531ff1d3a, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.48173326
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a5f52995be93776c9a57c6d531ff1d3a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.48173282
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a5f52995be93776c9a57c6d531ff1d3a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a5f52995be93776c9a57c6d531ff1d3a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -33135,7 +33194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a5f52995be93776c9a57c6d531ff1d3a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -85.886
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a5f52995be93776c9a57c6d531ff1d3a, type: 3}
       propertyPath: m_Name
@@ -33455,7 +33514,7 @@ GameObject:
   - component: {fileID: 1311394672}
   - component: {fileID: 1311394671}
   - component: {fileID: 1311394674}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ProximityTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43553,7 +43612,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1735927796}
-  - component: {fileID: 1735927795}
   m_Layer: 0
   m_Name: Entrance
   m_TagString: Untagged
@@ -43561,27 +43619,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &1735927795
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1735927794}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.5788687, y: 0.11971903, z: 1}
-  m_Center: {x: -0.052770674, y: -1.4401405, z: 0}
 --- !u!4 &1735927796
 Transform:
   m_ObjectHideFlags: 0
@@ -43598,6 +43635,7 @@ Transform:
   - {fileID: 2124887697}
   - {fileID: 2066599317}
   - {fileID: 372034955}
+  - {fileID: 865966543}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1746529295
@@ -53195,7 +53233,7 @@ GameObject:
   - component: {fileID: 1910708815}
   - component: {fileID: 1910708814}
   - component: {fileID: 1910708813}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DoorAudioTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53253,8 +53291,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -53273,7 +53311,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -54203,7 +54241,7 @@ GameObject:
   - component: {fileID: 1940678397}
   - component: {fileID: 1940678400}
   - component: {fileID: 1940678401}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ProximityTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
