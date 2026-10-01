@@ -15,7 +15,7 @@ public class VRAvatarLocomotionAnimator : MonoBehaviour
     [Min(0f)]
     [SerializeField] private float minimumMoveSpeed = 0.08f;
 
-    [Tooltip("At this speed or faster, MoveAmount reaches 1.")]
+    [Tooltip("At this speed or faster, MoveAmount reaches +/-1.")]
     [Min(0.1f)]
     [SerializeField] private float fullWalkSpeed = 1.25f;
 
@@ -23,21 +23,36 @@ public class VRAvatarLocomotionAnimator : MonoBehaviour
     [Min(0.1f)]
     [SerializeField] private float teleportDistance = 1.25f;
 
+    [Tooltip("If movement is this strongly opposite the headset's facing direction, use Walk Backwards. Sideways movement uses the normal Walk clip because there is no strafe animation.")]
+    [Range(-1f, 0f)]
+    [SerializeField] private float backwardsDirectionThreshold = -0.35f;
+
     [Header("Crouch Detection")]
-    [Tooltip("How far the headset must drop from the calibrated standing height before crouching begins.")]
+    [Tooltip("Absolute headset height above the PlayerController origin that counts as seated/crouched. This lets a player who STARTS seated immediately use the crouch animation.")]
+    [Min(0.5f)]
+    [SerializeField] private float seatedCrouchHeight = 1.35f;
+
+    [Tooltip("Once a standing height has been learned, this additional drop also triggers crouching.")]
     [Min(0.05f)]
     [SerializeField] private float crouchEnterDrop = 0.28f;
 
-    [Tooltip("Crouch ends once the headset is this close to standing height. Keep lower than Crouch Enter Drop.")]
+    [Tooltip("Crouch ends once the headset is this close to the learned standing height. Keep lower than Crouch Enter Drop.")]
     [Min(0.01f)]
     [SerializeField] private float crouchExitDrop = 0.16f;
 
-    [Tooltip("When standing, slowly allow a slightly taller measured posture to become the new baseline.")]
+    [Tooltip("Extra height above the seated threshold required before a seated player is considered standing. Prevents jitter near the threshold.")]
+    [Min(0f)]
+    [SerializeField] private float seatedExitMargin = 0.10f;
+
+    [Tooltip("When standing, slowly allow a slightly taller posture to become the new standing baseline.")]
     [Min(0f)]
     [SerializeField] private float standingHeightAdaptSpeed = 0.25f;
 
     [Header("Animator Parameters")]
+    [Tooltip("Float: -1 = backwards, 0 = idle, +1 = forward walk.")]
     [SerializeField] private string moveAmountParameter = "MoveAmount";
+
+    [Tooltip("Float: 0 = standing, 1 = crouched.")]
     [SerializeField] private string crouchAmountParameter = "CrouchAmount";
 
     [Min(0f)]
@@ -56,12 +71,14 @@ public class VRAvatarLocomotionAnimator : MonoBehaviour
 
     private Vector3 previousMovementPosition;
     private bool movementInitialized;
+
     private float standingHeadHeight;
-    private bool heightInitialized;
+    private bool standingHeightKnown;
     private bool isCrouching;
 
     public float MoveAmount { get; private set; }
     public bool IsCrouching => isCrouching;
+    public float CurrentHeadHeight { get; private set; }
 
     private void Awake()
     {
@@ -145,7 +162,7 @@ public class VRAvatarLocomotionAnimator : MonoBehaviour
         Vector3 delta = currentPosition - previousMovementPosition;
         previousMovementPosition = currentPosition;
 
-        Vector2 horizontalDelta = new Vector2(delta.x, delta.z);
+        Vector3 horizontalDelta = Vector3.ProjectOnPlane(delta, Vector3.up);
         float frameDistance = horizontalDelta.magnitude;
 
         if (frameDistance > teleportDistance || Time.deltaTime <= 0f)
@@ -162,61 +179,100 @@ public class VRAvatarLocomotionAnimator : MonoBehaviour
             return;
         }
 
-        MoveAmount = Mathf.InverseLerp(
+        float normalizedSpeed = Mathf.InverseLerp(
             minimumMoveSpeed,
             Mathf.Max(minimumMoveSpeed + 0.01f, fullWalkSpeed),
             speed
         );
+
+        Vector3 movementDirection = horizontalDelta.normalized;
+        Vector3 headForward = Vector3.ProjectOnPlane(playerHead.forward, Vector3.up);
+
+        if (headForward.sqrMagnitude < 0.001f)
+        {
+            MoveAmount = normalizedSpeed;
+            return;
+        }
+
+        headForward.Normalize();
+        float forwardDot = Vector3.Dot(movementDirection, headForward);
+
+        // We only have forward/backward clips. Treat strafing as forward walking.
+        MoveAmount = forwardDot <= backwardsDirectionThreshold
+            ? -normalizedSpeed
+            : normalizedSpeed;
     }
 
     private void UpdateCrouch()
     {
-        float currentHeadHeight = playerHead.position.y - movementRoot.position.y;
+        CurrentHeadHeight = playerHead.position.y - movementRoot.position.y;
 
-        if (!heightInitialized)
+        // Important: this absolute check means somebody who starts the experience
+        // already sitting down is immediately represented as crouching.
+        bool definitelySeated = CurrentHeadHeight <= seatedCrouchHeight;
+
+        if (!standingHeightKnown)
         {
-            standingHeadHeight = currentHeadHeight;
-            heightInitialized = true;
+            if (definitelySeated)
+            {
+                SetCrouching(true);
+                return;
+            }
+
+            standingHeadHeight = CurrentHeadHeight;
+            standingHeightKnown = true;
+            SetCrouching(false);
             return;
         }
 
-        float dropFromStanding = standingHeadHeight - currentHeadHeight;
-
-        if (!isCrouching)
+        if (isCrouching)
         {
-            if (dropFromStanding >= crouchEnterDrop)
-            {
-                isCrouching = true;
+            bool highEnoughToLeaveSeatedPose =
+                CurrentHeadHeight >= seatedCrouchHeight + seatedExitMargin;
 
-                if (debugLogging)
-                    Debug.Log("Avatar entered crouch.", this);
-            }
-            else if (currentHeadHeight > standingHeadHeight)
+            float dropFromStanding = standingHeadHeight - CurrentHeadHeight;
+            bool closeEnoughToStanding = dropFromStanding <= crouchExitDrop;
+
+            if (highEnoughToLeaveSeatedPose && closeEnoughToStanding)
+                SetCrouching(false);
+        }
+        else
+        {
+            float dropFromStanding = standingHeadHeight - CurrentHeadHeight;
+
+            if (definitelySeated || dropFromStanding >= crouchEnterDrop)
             {
-                // This adapts to users settling into a slightly taller natural
-                // posture without using a fixed real-world player height.
+                SetCrouching(true);
+            }
+            else if (CurrentHeadHeight > standingHeadHeight)
+            {
                 standingHeadHeight = Mathf.MoveTowards(
                     standingHeadHeight,
-                    currentHeadHeight,
+                    CurrentHeadHeight,
                     standingHeightAdaptSpeed * Time.deltaTime
                 );
             }
         }
-        else if (dropFromStanding <= crouchExitDrop)
-        {
-            isCrouching = false;
+    }
 
-            if (debugLogging)
-                Debug.Log("Avatar exited crouch.", this);
-        }
+    private void SetCrouching(bool value)
+    {
+        if (isCrouching == value)
+            return;
+
+        isCrouching = value;
+
+        if (debugLogging)
+            Debug.Log(value ? "Avatar entered crouch." : "Avatar exited crouch.", this);
     }
 
     public void ResetTracking()
     {
         movementInitialized = false;
-        heightInitialized = false;
+        standingHeightKnown = false;
         isCrouching = false;
         MoveAmount = 0f;
+        CurrentHeadHeight = 0f;
 
         if (movementRoot != null)
             previousMovementPosition = movementRoot.position;
