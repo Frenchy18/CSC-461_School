@@ -18049,7 +18049,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -18072,10 +18072,10 @@ MonoBehaviour:
   _twoGrabTransformer: {fileID: 0}
   _targetTransform: {fileID: 0}
   _maxGrabPoints: -1
-  _rigidbody: {fileID: 0}
+  _rigidbody: {fileID: 563018062}
   _kinematicWhileSelected: 1
   _throwWhenUnselected: 1
-  _forceKinematicDisabled: 0
+  _forceKinematicDisabled: 1
 --- !u!136 &563018064
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -32442,7 +32442,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -32470,11 +32470,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &1261301788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32494,10 +32494,10 @@ MonoBehaviour:
   _twoGrabTransformer: {fileID: 0}
   _targetTransform: {fileID: 0}
   _maxGrabPoints: -1
-  _rigidbody: {fileID: 0}
+  _rigidbody: {fileID: 1261301787}
   _kinematicWhileSelected: 1
   _throwWhenUnselected: 1
-  _forceKinematicDisabled: 0
+  _forceKinematicDisabled: 1
 --- !u!1 &1266321038
 GameObject:
   m_ObjectHideFlags: 0
@@ -33614,7 +33614,6 @@ GameObject:
   - component: {fileID: 1279920405}
   - component: {fileID: 1279920408}
   - component: {fileID: 1279920407}
-  - component: {fileID: 1279920406}
   m_Layer: 0
   m_Name: ISDK_HandGrabInteraction
   m_TagString: Untagged
@@ -33637,33 +33636,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1261301785}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &1279920406
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1279920404}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &1279920407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57399,6 +57371,7 @@ GameObject:
   - component: {fileID: 2060296029}
   - component: {fileID: 2060296031}
   - component: {fileID: 2060296030}
+  - component: {fileID: 2060296032}
   m_Layer: 0
   m_Name: Area Light (1)
   m_TagString: Untagged
@@ -57500,7 +57473,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -57515,6 +57488,24 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!114 &2060296032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060296028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31019534747eea802abb21d02ccd149d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IntermittentLightFlicker
+  timeBetweenBursts: {x: 1.5, y: 4}
+  flickerDuration: {x: 0.035, y: 0.11}
+  intensityMultiplier: {x: 0.35, y: 1.1}
+  flickersPerBurst: {x: 2, y: 6}
+  blackoutChance: 0.25
+  blackoutDuration: {x: 0.25, y: 1.5}
 --- !u!1 &2062043708
 GameObject:
   m_ObjectHideFlags: 0
