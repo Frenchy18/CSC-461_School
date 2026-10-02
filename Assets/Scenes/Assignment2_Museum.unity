@@ -44472,7 +44472,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Cameras have evolved from large-film based system to compact digital tools.
+  m_text: Cameras have evolved from large-film based systems to compact digital tools.
     Advances in sensors, lenses, stabilization, and recording formats have changed
     how filmmakers capture images.\n\n Grab a camera to look at it in finer detail
   m_isRightToLeft: 0
