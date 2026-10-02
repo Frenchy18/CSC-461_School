@@ -38,6 +38,9 @@ This museum equips you with your own avatar, rigged as best a newbie can, a flas
 ![Most importantly, your prize for completing the Museum]
 <img width="732" height="621" alt="EarlyExhibitWork" src="https://github.com/user-attachments/assets/f8b2ec5c-c598-441c-b54b-c9cf7358563a" />
 
+Bonus 2: Added animations to at least 2 exhibits (Camera Lighting) and (Camera Composition)
 Bonus 3: Implement a system that tracks how many exhibits the user visits (Left hand watch) and provides a reward (A cupcake).
 
 Lastly, try picking things up. Some things are interactable. Some things have sound effects. I explored a lot with this assignment.
+
+There's a few other animations too, sprinkled in. :D
