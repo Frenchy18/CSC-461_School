@@ -35,6 +35,8 @@ public class WearableHeadphones : MonoBehaviour
     private Coroutine releaseRoutine;
     private Vector3 wornLocalPosition;
     private Quaternion wornLocalRotation;
+    private Collider[] headphoneColliders;
+    private bool[] originalTriggerStates;
 
     private void OnEnable()
     {
@@ -144,6 +146,7 @@ public class WearableHeadphones : MonoBehaviour
             return;
 
         IsWorn = true;
+        SetWornCollisionMode(true);
 
         if (headphoneRigidbody != null)
         {
@@ -216,6 +219,8 @@ public class WearableHeadphones : MonoBehaviour
 
         transform.SetParent(null, true);
 
+        SetWornCollisionMode(false);
+
         if (headphoneRigidbody != null)
         {
             headphoneRigidbody.useGravity = true;
@@ -276,5 +281,48 @@ public class WearableHeadphones : MonoBehaviour
 
         if (headphoneCanvas != null)
             headphoneCanvas.SetActive(visible);
+    }
+
+    private void Awake()
+    {
+        headphoneColliders = GetComponentsInChildren<Collider>(true);
+
+        originalTriggerStates =
+            new bool[headphoneColliders.Length];
+
+        for (int i = 0; i < headphoneColliders.Length; i++)
+        {
+            if (headphoneColliders[i] != null)
+            {
+                originalTriggerStates[i] =
+                    headphoneColliders[i].isTrigger;
+            }
+        }
+    }
+
+    private void SetWornCollisionMode(bool worn)
+    {
+        if (headphoneColliders == null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < headphoneColliders.Length; i++)
+        {
+            Collider col = headphoneColliders[i];
+
+            if (col == null)
+            {
+                continue;
+            }
+
+            if (worn)
+            {
+                col.isTrigger = true;
+            } else
+            {
+                col.isTrigger = originalTriggerStates[i];
+            }
+        }
     }
 }

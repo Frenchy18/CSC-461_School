@@ -5631,7 +5631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LookAtPrompt
   viewer: {fileID: 987636564}
-  targetCollider: {fileID: 0}
+  targetCollider: {fileID: 227692653}
   promptCanvas: {fileID: 639400301}
   wearable: {fileID: 227692651}
   maxDistance: 2.5
