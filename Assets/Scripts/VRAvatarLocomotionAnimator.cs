@@ -205,7 +205,7 @@ public class VRAvatarLocomotionAnimator : MonoBehaviour
 
     private void UpdateCrouch()
     {
-        CurrentHeadHeight = playerHead.position.y - movementRoot.position.y;
+        CurrentHeadHeight = playerHead.localPosition.y;
 
         // Important: this absolute check means somebody who starts the experience
         // already sitting down is immediately represented as crouching.
