@@ -26,14 +26,15 @@ This museum showcases a few interesting camera technologies, how post-production
 
 This museum equips you with your own avatar, rigged as best a newbie can manage, a flashlight to find your way in the dark, and a watch to track how many exhibits you've been to. But be careful, once you've completed the museum, you only have a short time before the museum wants you to leave. It will ever so kindly escort you out. Just make sure to take your prize on the way out.
 
+
+![Proximity Boxes, multiple layers of texts over texts]
+<img width="1428" height="746" alt="EarlyExhibitImages" src="https://github.com/user-attachments/assets/404342de-82d3-4ce8-bbba-0f73762053ee" />
+
 ![My attempt at rigging a model for animations]
 <img width="2529" height="784" alt="AnimationImage01" src="https://github.com/user-attachments/assets/3dd75468-a744-4079-a65e-83ac77dc6a9d" />
 
 ![Once I decided how to organize the layout]
 <img width="1473" height="786" alt="CompletedExhibitBuild" src="https://github.com/user-attachments/assets/0db26d0a-8f30-4d2a-8772-10b7bb937f09" />
-
-![Proximity Boxes, multiple layers of texts over texts]
-<img width="1428" height="746" alt="EarlyExhibitImages" src="https://github.com/user-attachments/assets/404342de-82d3-4ce8-bbba-0f73762053ee" />
 
 ![Most importantly, your prize for completing the Museum]
 <img width="732" height="621" alt="EarlyExhibitWork" src="https://github.com/user-attachments/assets/f8b2ec5c-c598-441c-b54b-c9cf7358563a" />
