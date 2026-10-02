@@ -5520,13 +5520,13 @@ PrefabInstance:
       addedObject: {fileID: 227692648}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 085f1157bd93d19a1a453c387b044e5b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 227692650}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 085f1157bd93d19a1a453c387b044e5b, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 227692651}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 085f1157bd93d19a1a453c387b044e5b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 227692652}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 085f1157bd93d19a1a453c387b044e5b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 227692653}
   m_SourcePrefab: {fileID: 100100000, guid: 085f1157bd93d19a1a453c387b044e5b, type: 3}
 --- !u!4 &227692646 stripped
 Transform:
@@ -5588,27 +5588,6 @@ MonoBehaviour:
   _kinematicWhileSelected: 1
   _throwWhenUnselected: 1
   _forceKinematicDisabled: 0
---- !u!65 &227692650
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 227692647}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 257
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 252
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.28510618, y: 0.11742473, z: 0.2929201}
-  m_Center: {x: 0.000011205673, y: 0.08059192, z: 0.15619707}
 --- !u!114 &227692651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5646,12 +5625,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LookAtPrompt
   viewer: {fileID: 987636564}
-  targetCollider: {fileID: 227692650}
+  targetCollider: {fileID: 0}
   promptCanvas: {fileID: 639400301}
   wearable: {fileID: 227692651}
   maxDistance: 2.5
   maxLookAngle: 15
   fadeSpeed: 5
+--- !u!64 &227692653
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227692647}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -462981019419857548, guid: 085f1157bd93d19a1a453c387b044e5b, type: 3}
 --- !u!1 &228155578
 GameObject:
   m_ObjectHideFlags: 0
@@ -20095,7 +20096,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 543450651847444065}
-  - {fileID: 1261301785}
   m_Father: {fileID: 471712667}
   m_LocalEulerAnglesHint: {x: 0, y: -5, z: 0}
 --- !u!1 &639400299
@@ -24935,7 +24935,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 63ab00a5fb8983701aaf4313107f0bf2, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -32639,39 +32639,47 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 636397611}
+    m_TransformParent: {fileID: 3053886873925837105}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 2d91c8bbac9d1737da965fed64dc9efd, type: 3}
       propertyPath: m_LocalScale.x
-      value: 71.999985
+      value: 0.71999985
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2d91c8bbac9d1737da965fed64dc9efd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.71999973
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2d91c8bbac9d1737da965fed64dc9efd, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7199998
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2d91c8bbac9d1737da965fed64dc9efd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.8044842
+      value: -0.0004591353
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2d91c8bbac9d1737da965fed64dc9efd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.71
+      value: 0.015062038
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2d91c8bbac9d1737da965fed64dc9efd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.3726502
+      value: 0.0058371937
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2d91c8bbac9d1737da965fed64dc9efd, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.4273997
+      value: -0.70612353
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2d91c8bbac9d1737da965fed64dc9efd, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.42739922
+      value: 0.7063697
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2d91c8bbac9d1737da965fed64dc9efd, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.56332034
+      value: 0.034874883
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2d91c8bbac9d1737da965fed64dc9efd, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.56332016
+      value: 0.03486261
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2d91c8bbac9d1737da965fed64dc9efd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -46243,7 +46251,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: ef55c879584614651a05bbce79926dfa, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -62226,6 +62234,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1864333426973624906}
+  - {fileID: 1261301785}
   m_Father: {fileID: 1475561003469721670}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3116509788041753379
