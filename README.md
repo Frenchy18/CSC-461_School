@@ -19,12 +19,12 @@ In a VR Headset, the skybox is set to a beautiful deck outdoors
 TM1: Chris Groves
 
 ## VR Museum
-This "Museum" took me a while to come up with the concept, originally I planned on doing a Red Vs Blue (A History) style museum, of the original Red Vs Blue skits on youtube from the early/mid 2000's, a core part of my childhood, until I saw the requirement that the exhibit must be educational. This museum may not be as educational as others, but it certainly educated me on how Unity works and doesn't work.
+This "Museum" took me a while to come up with the concept, originally I planned on doing a Red Vs Blue (A History) style museum, of the original Red vs. Blue skits on Youtube from the early/mid 2000s, a core part of my childhood, until I saw the requirement that the exhibit must be educational. This museum may not be as educational as others, but it certainly educated me on how Unity works and doesn't work.
 <img width="1159" height="630" alt="image" src="https://github.com/user-attachments/assets/6a0703e0-aca6-4424-a6b6-49ba3768fafd" />
 ### What you'll find
-This museum showcases a few interesting camera technologies, how post-production works, how lighting can affect a scene, how camera angles can affect a scene, and it also includes a walk in theater showcasing a behind the scenes video of the movie "Five Nights at Freddys". Oh, I didn't mention that's what this museum showcases did I?
+This museum showcases a few interesting camera technologies, how post-production works, how lighting can affect a scene, how camera angles can affect a scene, and it also includes a walk-in theater showcasing a behind-the-scenes video of the movie "Five Nights at Freddy's". Oh, I didn't mention that's what this museum features did I?
 
-This museum equips you with your own avatar, rigged as best a newbie can, a flashlight to find your way in the dark, and a watch, to track how many exhibits you've been to, but be careful, once you've completed the museum, you only have a short time before the museum wants you to leave. It will ever so kindly escort you out. Just make sure to take your prize on the way out.
+This museum equips you with your own avatar, rigged as best a newbie can manage, a flashlight to find your way in the dark, and a watch to track how many exhibits you've been to. But be careful, once you've completed the museum, you only have a short time before the museum wants you to leave. It will ever so kindly escort you out. Just make sure to take your prize on the way out.
 
 ![My attempt at rigging a model for animations]
 <img width="2529" height="784" alt="AnimationImage01" src="https://github.com/user-attachments/assets/3dd75468-a744-4079-a65e-83ac77dc6a9d" />
