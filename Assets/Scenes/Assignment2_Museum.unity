@@ -3053,6 +3053,7 @@ GameObject:
   m_Component:
   - component: {fileID: 128587578}
   - component: {fileID: 128587579}
+  - component: {fileID: 128587580}
   m_Layer: 6
   m_Name: LightingExhibit
   m_TagString: Untagged
@@ -3108,6 +3109,25 @@ MonoBehaviour:
   faceHeight: 1.55
   horrorKeyHeight: 0.7
   horrorKeyForwardDistance: 0.65
+--- !u!114 &128587580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128587577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dca820a2e05be27cf9c37e1ed909cd3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightingFredHeadTracker
+  fredAnimator: {fileID: 574796415}
+  headBone: {fileID: 574796414}
+  playerHead: {fileID: 987636564}
+  horrorButton: {fileID: 1891382925}
+  turnSpeed: 2
+  maxYaw: 65
+  maxPitch: 30
 --- !u!1001 &129094871
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18982,6 +19002,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4a3162c0f42d0f73285c2c1d83930e1a, type: 3}
   m_PrefabInstance: {fileID: 574796412}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &574796414 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3481303391068659727, guid: 4a3162c0f42d0f73285c2c1d83930e1a, type: 3}
+  m_PrefabInstance: {fileID: 574796412}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &574796415 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 4a3162c0f42d0f73285c2c1d83930e1a, type: 3}
+  m_PrefabInstance: {fileID: 574796412}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &586030935
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22189,6 +22219,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a3162c0f42d0f73285c2c1d83930e1a, type: 3}
+--- !u!4 &656958250 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3481303391068659727, guid: 4a3162c0f42d0f73285c2c1d83930e1a, type: 3}
+  m_PrefabInstance: {fileID: 656958249}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &656958251 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 4a3162c0f42d0f73285c2c1d83930e1a, type: 3}
+  m_PrefabInstance: {fileID: 656958249}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &675015494
 GameObject:
   m_ObjectHideFlags: 0
@@ -41683,6 +41723,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1531267307}
   - component: {fileID: 1531267308}
+  - component: {fileID: 1531267309}
   m_Layer: 0
   m_Name: CameraExhibit
   m_TagString: Untagged
@@ -41746,6 +41787,29 @@ MonoBehaviour:
   renderWidth: 960
   renderHeight: 540
   autoAimAtSubject: 0
+--- !u!114 &1531267309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531267306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33eb8f1a6c0dec95ba1789ae8b0210de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CompositionFredHeadAnimator
+  fredAnimator: {fileID: 656958251}
+  headBone: {fileID: 656958250}
+  wideButton: {fileID: 186431545}
+  mediumButton: {fileID: 725506997}
+  closeUpButton: {fileID: 6933852}
+  lowAngleButton: {fileID: 1182703443}
+  highAngleButton: {fileID: 2095599267}
+  lowAnglePitch: 22
+  highAnglePitch: -22
+  animationDuration: 0.55
+  overshootAmount: 6
 --- !u!1 &1551191946
 GameObject:
   m_ObjectHideFlags: 0
